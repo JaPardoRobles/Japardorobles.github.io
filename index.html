@@ -1,351 +1,349 @@
 <!DOCTYPE html>
-<html>
-
-  <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Juan Antonio Pardo Robles</title>
-  <meta name="description" content="This is my personal site where you can find some of my projects, enjoy it.
-">
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-74371206-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://japardorobles.github.io/">
-  <link rel="alternate" type="application/rss+xml" title="Juan Antonio Pardo Robles" href="http://japardorobles.github.io/feed.xml">
-</head>
-
-
-  <body>
-
-    <header class="site-header">
-<!--//BLOQUE COOKIES-->
-<div id="barraaceptacion" style="display: block; width:30%">
-    <div class="inner">
-        This site uses cookies to offer you a better browsing experience. 
-        <a href="javascript:void(0);" class="ok" onclick="PonerCookie();"><b>OK</b></a> | 
-        <a href="http://ec.europa.eu/cookies/index_en.htm" target="_blank" class="info">More info.</a>
-    </div>
-</div>
- 
-<script>
-function getCookie(c_name){
-    var c_value = document.cookie;
-    var c_start = c_value.indexOf(" " + c_name + "=");
-    if (c_start == -1){
-        c_start = c_value.indexOf(c_name + "=");
-    }
-    if (c_start == -1){
-        c_value = null;
-    }else{
-        c_start = c_value.indexOf("=", c_start) + 1;
-        var c_end = c_value.indexOf(";", c_start);
-        if (c_end == -1){
-            c_end = c_value.length;
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juan Antonio Pardo Robles - Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
         }
-        c_value = unescape(c_value.substring(c_start,c_end));
-    }
-    return c_value;
-}
- 
-function setCookie(c_name,value,exdays){
-    var exdate=new Date();
-    exdate.setDate(exdate.getDate() + exdays);
-    var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-    document.cookie=c_name + "=" + c_value;
-}
- 
-if(getCookie('tiendaaviso')!="1"){
-    document.getElementById("barraaceptacion").style.display="block";
-}
-function PonerCookie(){
-    setCookie('tiendaaviso','1',365);
-    document.getElementById("barraaceptacion").style.display="none";
-}
-</script>
-<!--//FIN BLOQUE COOKIES-->
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        section {
+            margin-bottom: 3rem;
+        }
+        h2 {
+            border-bottom: 2px solid #333;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .about-description {
+            flex: 0 0 calc(33.33% - 1rem);
+            padding: 1rem;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        #about p {
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        #projects {
+            position: relative;
+            overflow: hidden;
+        }
+        .project-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+        .project {
+            flex: 0 0 calc(33.33% - 1rem);
+            padding: 1rem;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            text-align: center;
+            cursor: pointer;
+            opacity: 1;
+            visibility: visible;
+        }
+        .project img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .project a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+        .navigation-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+        #project-details {
+            margin-top: 2rem;
+            background-color: #fff;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: none;
+        }
+        #project-details h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        #project-details p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .skills-languages-items{
+            flex: 1;
+            background-color: #fff;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .experience-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .experience-item-list{
+            flex: 1;
+            background-color: #fff;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .experience-column h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .experience-item {
+            margin-bottom: 2rem;
+        }
+        .experience-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .experience-details p {
+            font-size: 1rem;
+            margin: 0.2rem 0;
+        }
+        .skills-languages h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .skills-languages ul {
+            list-style: none;
+            padding: 0;
+        }
+        .skills-languages ul li {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        #contact ul {
+            list-style: none;
+            padding: 0;
+        }
+        #contact ul li {
+            margin-bottom: 1rem;
+        }
+        #contact a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        #contact a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .experience-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Juan Antonio Pardo Robles</h1>
+    </header>
 
-  <div class="wrapper">
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-description">
+            <p>
+                I am a passionate video game programmer with a lifelong interest in the field, which began in my childhood by modifying Pokémon ROMs. 
+                My formal journey started with intermediate and advanced vocational diplomas in computer science, but it was during this time that I discovered 
+                I could turn my love for video game programming into a career. I pursued my studies at ESAT Valencia (Spain) and later completed my degree 
+                at Teesside University (UK).
+            </p>
+            <p>
+                My expertise lies in Unreal Engine 5 and C++, though over the course of my career, I’ve had the opportunity to work across various areas as 
+                a gameplay engineer. Currently, I have specialized in Animation Engineering, where I focus on developing and optimizing animation systems.
+            </p>
+            <p>
+                I pride myself on being highly efficient and capable of completing tasks quickly without compromising quality, while always being willing to 
+                tackle problems and assist others. I place a strong emphasis on thorough documentation, as effective communication is essential, especially 
+                in remote work environments. I enjoy working cross-functionally, and in my current role, I collaborate closely with the animation and technical art teams.
+            </p>
+            <p>
+                In my personal life, I’m an avid gamer. I also enjoy printing/painting miniatures and taking on DIY projects.
+            </p>
+            </div>
+        </section>
 
-    <a class="site-title" href="/">Juan Antonio Pardo Robles</a>
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project-carousel">
+                <div class="project" onclick="showProjectDetails('Project Ethos', 'As the sole programmer for this project, I was responsible for designing, optimizing, and maintaining the animation systems. Key contributions included the implementation of the Significance Manager, as well as performance optimization tools for animation, such as Update Rate Optimization and the Animation Budget Allocator, all tailored to Unreal Engine 5 architecture.')">
+                    <img src=".\images\projectethos.jfif" alt="Project Ethos">
+                    <p>Project Ethos</p>
+                </div>
+                <div class="project" onclick="showProjectDetails('Evil Dead: The Game', 'I worked as a general Gameplay Programmer, which allowed me to develop and maintain various systems across the project. Some of these systems included melee combat, ranged combat, abilities, vehicles, physics, and animation systems, among others. All of this was done using Unreal Engine 4')">
+                    <img src=".\images\evildead.jfif" alt="Evil Dead: The Game">
+                    <p>Evil Dead: The Game</p>
+                </div>
+                <div class="project" onclick="showProjectDetails('WWE 2K Battlegrounds', 'I worked as a general Gameplay Programmer, with a focus on animation systems, including synchronization of joint animations, as well as melee combat mechanics. This project was developed using Unreal Engine 4')">
+                    <img src=".\images\wwe.jpg" alt="WWE 2K Battlegrounds">
+                    <p>WWE 2K Battlegrounds</p>
+                </div>
+                <div class="project" onclick="showProjectDetails('NBA 2K Playgrounds 2', 'I contributed as a general Gameplay Programmer, primarily focusing on animation systems, creating new abilities, and bug fixing. The project was developed using Unreal Engine 4')">
+                    <img src=".\images\nba.avif" alt="NBA 2K Playgrounds 2">
+                    <p>NBA 2K Playgrounds 2</p>
+                </div>
+                <div class="project" onclick="showProjectDetails('World of Warriors', 'In World of Warriors, I focused on bug fixing during the final phase of the project. This was done using Unreal Engine 4')">
+                    <img src=".\images\wow.jfif" alt="World of Warriors">
+                    <p>World of Warriors</p>
+                </div>
+                <div class="project" onclick="showProjectDetails('Melita VR', 'In Melita VR, I was responsible for the implementation and maintenance of this virtual reality experience, utilizing Unreal Engine 4')">
+                    <img src=".\images\melita.jfif" alt="Melita VR">
+                    <p>Melita VR</p>
+                </div>
+            </div>
+            <div class="navigation-arrow prev" onclick="moveCarousel(-1)">&#8592;</div>
+            <div class="navigation-arrow next" onclick="moveCarousel(1)">&#8594;</div>
+        </section>
 
-    <nav class="site-nav">
-      <a href="#" class="menu-icon">
-        <svg viewBox="0 0 18 15">
-          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-        </svg>
-      </a>
+        <div id="project-details">
+            <h3 id="project-title">Select a project</h3>
+            <p id="project-description">Click on a project to see its description.</p>
+        </div>
 
-      <div class="trigger">
-        
-          
-          <a class="page-link" href="/about/">About me</a>
-          
-        
-          
-        
-          
-        
-          
-        
-      </div>
-    </nav>
+        <div class="experience-container">
+            <div class="experience-column">
+                <h2>Experience</h2>
+                <div class="experience-item-list">
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>31st Union</h3>
+                        <p><strong>Expert Animation Engineer</strong></p>
+                        <p>Dec 2023 - Present</p>
+                        <p><strong>Senior Multiplayer Gameplay Engineer / Senior Animation Engineer</strong></p>
+                        <p>Jun 2021 - Dec 2023 · 2 yrs 7 mos</p>
+                        <p><strong>Remote</strong></p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>Saber Interactive</h3>
+                        <p><strong>Gameplay Programmer</strong></p>
+                        <p>Oct 2017 - Jun 2021 · 3 yrs 9 mos</p>
+                        <p><strong>Madrid, Spain</strong></p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-details">
+                        <h3>Future Lighthouse</h3>
+                        <p><strong>VR, Unity and Unreal Engine Developer</strong></p>
+                        <p>Oct 2016 - Oct 2017 · 1 yr</p>
+                        <p><strong>Madrid, Spain</strong></p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="experience-column">                
+                <h2>Skills & Languages</h2>
+                <div class="skills-languages-items">
+                <h3>Skills</h3>
+                <ul>
+                    <li>C++</li>
+                    <li>Unreal Engine 5</li>
+                </ul>
+                <h3>Languages</h3>
+                <ul>
+                    <li>English: Full professional proficiency</li>
+                    <li>Spanish: Native or bilingual proficiency</li>
+                </ul>
+            </div>
+                <h2>Education</h2>
+                <div class="skills-languages-items">
+                <p><strong>Teesside University</strong></p>
+                <p>BSc (Hons) Computer Games Programming</p>
+            </div>
+            </div>
+        </div>
 
-  </div>
-
-<div class="linkImages">
-  <a href="https://www.youtube.com/user/roblesandroid/"><img class="imagesLinks" src="/resources/youtube.png" width="120px" /></a>
-  <a href="https://github.com/JaPardoRobles"><img class="imagesLinks" src="/resources/github.png" width="120px" /></a>
-  <a href="https://es.linkedin.com/in/juanantoniopardorobles"><img class="/imagesLinks" src="/resources/linkedin.png" width="120px" /></a>
-  <a href="#"><img class="imagesLinks" src="/resources/cv.jpg" width="120px" /></a>
-  <br/>
-  <p style="margin-top:10px;">japardorobles.contact@gmail.com</p>
-</div>
-
-</header>
-
-
-    <div class="page-content">
-      <div class="wrapper">
-        <div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Sep 14, 2016</span>
-<a class="post-link" href="/unity/2016/09/14/UnityJps.html">
-        
-         
-         
-          
-        
-          
-
-            
-                
-                <img src="/resources/jps.png"  />
-                
-            
-        
-        
-
-        <h2>
-          Unity3D - Pathfinding using JPS algorithm
-        </h2>
-        </a>
-      </li>
-    
-      <li>
-        <span class="post-meta">Apr 24, 2016</span>
-<a class="post-link" href="/showreel/2016/04/24/Showreel.html">
-        
-         
-         
-          
-        
-          
-
-            
-                
-                <img src="/resources/showreel.png"  />
-                
-            
-        
-        
-
-        <h2>
-          Showreel
-        </h2>
-        </a>
-      </li>
-    
-      <li>
-        <span class="post-meta">Apr 24, 2016</span>
-<a class="post-link" href="/group_games/2016/04/24/SlamJunk.html">
-        
-         
-         
-          
-        
-          
-
-            
-                
-                <img src="/resources/slamjunk.jpg"  />
-                
-            
-        
-        
-
-        <h2>
-          SlamJunk
-        </h2>
-        </a>
-      </li>
-    
-      <li>
-        <span class="post-meta">Apr 19, 2016</span>
-<a class="post-link" href="/personalproject/2016/04/19/CarDash.html">
-        
-         
-         
-          
-        
-          
-
-            
-                
-                <img src="/resources/cardash.png"  />
-                
-            
-        
-        
-
-        <h2>
-          CarDash
-        </h2>
-        </a>
-      </li>
-    
-      <li>
-        <span class="post-meta">Mar 14, 2016</span>
-<a class="post-link" href="/personalproject/2016/03/14/Galactica.html">
-        
-         
-         
-          
-        
-          
-
-            
-                
-                <img src="/resources/galactica.png"  />
-                
-            
-        
-        
-
-        <h2>
-          Galactica
-        </h2>
-        </a>
-      </li>
-    
-      <li>
-        <span class="post-meta">Feb 24, 2016</span>
-<a class="post-link" href="/group_games/2016/02/24/WorldWideWreck.html">
-        
-         
-         
-          
-        
-          
-
-            
-                
-                <img src="/resources/worldwidewreck.png"  />
-                
-            
-        
-        
-
-        <h2>
-          World Wide Wreck
-        </h2>
-        </a>
-      </li>
-    
-      <li>
-        <span class="post-meta">Feb 24, 2016</span>
-<a class="post-link" href="/japrengine/2016/02/24/JAPREngine.html">
-        
-         
-         
-          
-        
-          
-
-            
-                
-                <img src="/resources/JAPREngine.png"  />
-                
-            
-        
-        
-
-        <h2>
-          JAPR Engine
-        </h2>
-        </a>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
-
-      </div>
+        <section id="contact">
+            <h2>Contact</h2>
+            <ul>
+                <li><a href="https://www.linkedin.com/in/juanantoniopardorobles/" target="_blank">LinkedIn Profile</a></li>
+                <li>Email: <a href="mailto:japardorobles.contact@gmail.com">japardorobles.contact@gmail.com</a></li>
+            </ul>
+        </section>
     </div>
+    <footer>
+        <p>© 2025 Juan Antonio Pardo Robles. All rights reserved.</p>
+    </footer>
+    <script>
+        const carousel = document.querySelector('.project-carousel');
+        let currentIndex = 0;
 
-    <footer class="site-footer">
+        function moveCarousel(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = 0;
+            } else if (currentIndex > 3) {
+                currentIndex = 3;
+            }
+            carousel.style.transform = `translateX(-${currentIndex * (carousel.children[0].offsetWidth + 10)}px)`;
+        }
 
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Juan Antonio Pardo Robles</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>Juan Antonio Pardo Robles</li>
-          <li><a href="mailto:japardorobles.contact@gmail.com">japardorobles.contact@gmail.com</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          
-          <li>
-            <a href="https://github.com/japardorobles"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
-</span><span class="username">japardorobles</span></a>
-
-          </li>
-          
-
-          
-          
-          <li>
-            <a href="https://es.linkedin.com/in/juanantoniopardorobles"><img style="width:24px;height:24px;" src="https://static.licdn.com/scds/common/u/img/promo/ads/LinkedIn_Logo50x50.png"/><span class="username">Linkedin</span></a>
-
-          </li>
-          
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>This is my personal site where you can find some of my projects, enjoy it.
-</p>
-      </div>
-    </div>
-
-  </div>
-
-</footer>
-
-
-  </body>
-
+        function showProjectDetails(title, description) {
+            document.getElementById('project-title').textContent = title;
+            document.getElementById('project-description').textContent = description;
+            document.getElementById('project-details').style.display = 'block';
+        }
+    </script>
+</body>
 </html>
