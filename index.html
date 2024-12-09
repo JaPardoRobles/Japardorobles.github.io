@@ -77,7 +77,6 @@
             gap: 10px;
         }
         .project {
-
             flex: 0 0 calc(33.33% - 10px); 
             max-width: calc(33.33% - 10px);
             padding: 1rem;
@@ -87,13 +86,53 @@
             text-align: center;
             cursor: pointer;
             box-sizing: border-box;
-                }
+        }
         .project img {
             width: 100%;
             height: auto;
             border-radius: 8px;
         }
         .project a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+        #personal-projects {
+            position: relative;
+            overflow: hidden;
+        }
+        .personal-project-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+            gap: 10px;
+        }
+        .personal-project {
+            flex: 0 0 calc(33.33% - 10px); 
+            max-width: calc(33.33% - 10px);
+            padding: 1rem;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        .personal-project img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        #personal-project-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        .personal-project a {
             text-decoration: none;
             color: #333;
             font-weight: bold;
@@ -132,6 +171,22 @@
             margin-bottom: 1rem;
         }
         #project-details p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        #personal-project-details {
+            margin-top: 2rem;
+            background-color: #fff;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: none;
+        }
+        #personal-project-details h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        #personal-project-details p {
             font-size: 1rem;
             line-height: 1.6;
         }
@@ -212,6 +267,13 @@
             .project-carousel {
                 gap: 15px;
             }
+            .personal-project {
+                flex: 0 0 calc(80% - 10px);
+                max-width: calc(80% - 10px);
+            }
+            .personal-project-carousel {
+                gap: 15px;
+            }
             .experience-container {
                 flex-direction: column;
             }
@@ -250,7 +312,6 @@
             </p>
             </div>
         </section>
-
         <section id="projects">
             <h2>Projects</h2>
             <div class="project-carousel">
@@ -286,6 +347,33 @@
         <div id="project-details">
             <h3 id="project-title">Select a project</h3>
             <p id="project-description">Click on a project to see its description.</p>
+        </div>
+
+        <section id="personal-projects">
+            <h2>Personal Projects</h2>
+            <div class="personal-project-carousel">
+                <div class="personal-project" onclick="showPersonalProjectDetails('JAPR Engine + Warcraft 3', 'JAPR Engine + Warcraft 3 is a project where I explored how to import Warcraft 3 maps into my own engine. This task was challenging due to the limited information currently available on Blizzard\'s format decompression and data structuring. Through this project, I\’ve learned to render maps by decompressing and interpreting Warcraft 3\'s .w3x, .blp, .mpq, and .w3e formats. My next goals for this project are to enhance my engine to support loading and interpreting .gltf files, enabling the addition of actors that can execute animations and move across the map.', '','.\\images\\war3_1.jpg')">
+                    <img src=".\images\war3.jpg" alt="JAPR Engine + Warcraft 3">
+                    <p>JAPR Engine + Warcraft 3</p>
+                </div>
+                <div class="personal-project" onclick="showPersonalProjectDetails('JAPR Engine', 'Japr Engine is my personal engine where I integrate SDL, OpenGL 3, Lua, and more. Along with this engine, I created a demo featuring procedural biome generation with voxels, Minecraft-style. Some highlights include the implementation of shadows, screen space ambient occlusion, and the generation of a single geometry encompassing all the voxels using a geometry shader.', 'https://www.youtube.com/watch?v=_HIitr2OMAY','')">
+                    <img src=".\images\voxels.jpg" alt="JAPR Engine">
+                    <p>JAPR Engine</p>
+                </div>
+                <div class="personal-project" onclick="showPersonalProjectDetails('Galactica', 'Galactica is a project I developed using Cocos2d-x and C++, focusing on procedural level generation that adapts to the player\'s skill level to enhance their gaming experience. The game is no longer available on the Play Store, but you can watch the gameplay here: ', 'https://www.youtube.com/watch?v=faT_EI0bbK8', '')"> 
+                    <img src=".\images\galactica.jpg" alt="Galactica">
+                    <p>Galactica</p>
+                </div>
+            </div>
+            <div class="navigation-arrow personal prev" onclick="movePersonalCarousel(-1)">&#8592;</div>
+            <div class="navigation-arrow personal next" onclick="movePersonalCarousel(1)">&#8594;</div>
+        </section>
+
+        <div id="personal-project-details">
+            <h3 id="personal-project-title">Select a project</h3>
+            <p id="personal-project-description">Click on a project to see its description.</p>
+            <p id="personal-project-link">Links.</p>
+            <img id="personal-project-image" src="" alt="Project Image" style="display:none;"/>
         </div>
 
         <div class="experience-container">
@@ -356,9 +444,15 @@
     <script>
         const carousel = document.querySelector('.project-carousel');
         const projects = document.querySelectorAll('.project');
-        let currentIndex = 0;
 
-        function moveCarousel(direction) {
+        const personalCarousel = document.querySelector('.personal-project-carousel');
+        const personalProjects = document.querySelectorAll('.personal-project');
+
+        let currentIndex = 0;
+        let personalProjectCurrentIndex = 0;
+
+        function moveCarousel(direction) 
+        {
             const projectWidth = projects[0].offsetWidth + 10; // Ancho del proyecto + margen
             const visibleProjects = Math.floor(carousel.offsetWidth / projectWidth); // Proyectos visibles
             const maxIndex = projects.length - visibleProjects; // Último índice posible
@@ -375,10 +469,52 @@
             carousel.style.transform = `translateX(${translateX}px)`;
         }
 
+        function movePersonalCarousel(direction) 
+        {
+            const projectWidth = personalProjects[0].offsetWidth + 10; // Ancho del proyecto + margen
+            const visibleProjects = Math.floor(personalCarousel.offsetWidth / projectWidth); // Proyectos visibles
+            const maxIndex = personalProjects.length - visibleProjects; // Último índice posible
+
+            personalProjectCurrentIndex += direction;
+
+            if (personalProjectCurrentIndex < 0) {
+                personalProjectCurrentIndex = 0;
+            } else if (personalProjectCurrentIndex > maxIndex) {
+                personalProjectCurrentIndex = maxIndex;
+            }
+
+            const translateX = -personalProjectCurrentIndex * projectWidth;
+            personalCarousel.style.transform = `translateX(${translateX}px)`;
+        }
+
         function showProjectDetails(title, description) {
             document.getElementById('project-title').textContent = title;
             document.getElementById('project-description').textContent = description;
             document.getElementById('project-details').style.display = 'block';
+        }
+
+        function showPersonalProjectDetails(title, description, link, imageUrl) {
+            document.getElementById('personal-project-title').textContent = title;
+            document.getElementById('personal-project-description').textContent = description;
+            if (link && link.trim() !== "")
+            {
+                document.getElementById('personal-project-link').innerHTML = `<a href="${link}" target="_blank">Watch Gameplay</a>`;
+            }
+            else
+            {
+                document.getElementById('personal-project-link').textContent = "";
+            }
+            if (imageUrl && imageUrl.trim() !== "") 
+            {
+                document.getElementById('personal-project-image').src = imageUrl;
+                document.getElementById('personal-project-image').style.display = 'block';
+            } 
+            else 
+            {
+                document.getElementById('personal-project-image').style.display = 'none';
+            }
+
+            document.getElementById('personal-project-details').style.display = 'block';
         }
 
         const background = document.getElementById('background');
@@ -472,6 +608,7 @@
             particles.length = 0;
             createParticles();
             moveCarousel(0);
+            movePersonalCarousel(0);
         });
 
         window.addEventListener('mousemove', (e) => {
