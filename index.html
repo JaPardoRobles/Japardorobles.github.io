@@ -278,6 +278,21 @@
                 flex-direction: column;
             }
         }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .responsive-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -351,15 +366,15 @@
         <section id="personal-projects">
             <h2>Personal Projects</h2>
             <div class="personal-project-carousel">
-                <div class="personal-project" onclick="showPersonalProjectDetails('JAPR Engine + Warcraft 3', 'JAPR Engine + Warcraft 3 is a project where I explored how to import Warcraft 3 maps into my own engine. This task was challenging due to the limited information currently available on Blizzard\'s format decompression and data structuring. Through this project, I\’ve learned to render maps by decompressing and interpreting Warcraft 3\'s .w3x, .blp, .mpq, and .w3e formats. Once I achieved that, I wanted to take it a step further and create some actors that I could control and move around the map while executing animations. These animations were initially calculated on the CPU, but now the mesh is modified on the GPU using shaders, allowing me to have many more actors on screen simultaneously. Glossary of what my project contains: ImGUI Nuklear, custom vector, quaternion, and matrix structures, decompression and handling of W3X and W3E (Warcraft 3) files with the help of StormLib for decompressing W3X, shader loading via LUA, materials, textures, geometries, actors, camera, buffers, skeletons, animInstance, tracks, clips, state Machines. In summary, it has been a great project. I’ve revived my personal engine, fixed many bugs along the way, and gained a much better understanding of the engine pipeline. I created my own AnimInstance with its State Machine, which blends between states/animations. I successfully loaded a Warcraft 3 map and rendered it using my own engine. However, there have also been moments of frustration, especially with loading the Warcraft 3 map, as there is very little reliable information available online nowadays also since the scene is so large, the shadow resolution was terrible, as a result, I had to develop a technique that only projects shadows for what I’m rendering. It’s far from perfect, but it serves its purpose.', 'https://www.youtube.com/watch?v=h-GsVF-QBtI','.\\images\\spider.gif')">
+                <div class="personal-project" onclick="showPersonalProjectDetails('JAPR Engine + Warcraft 3', 'JAPR Engine + Warcraft 3 is a project where I explored how to import Warcraft 3 maps into my own engine. This task was challenging due to the limited information currently available on Blizzard\'s format decompression and data structuring. Through this project, I\’ve learned to render maps by decompressing and interpreting Warcraft 3\'s .w3x, .blp, .mpq, and .w3e formats. Once I achieved that, I wanted to take it a step further and create some actors that I could control and move around the map while executing animations. These animations were initially calculated on the CPU, but now the mesh is modified on the GPU using shaders, allowing me to have many more actors on screen simultaneously. Glossary of what my project contains: ImGUI Nuklear, custom vector, quaternion, and matrix structures, decompression and handling of W3X and W3E (Warcraft 3) files with the help of StormLib for decompressing W3X, shader loading via LUA, materials, textures, geometries, actors, camera, buffers, skeletons, animInstance, tracks, clips, state Machines. In summary, it has been a great project. I’ve revived my personal engine, fixed many bugs along the way, and gained a much better understanding of the engine pipeline. I created my own AnimInstance with its State Machine, which blends between states/animations. I successfully loaded a Warcraft 3 map and rendered it using my own engine. However, there have also been moments of frustration, especially with loading the Warcraft 3 map, as there is very little reliable information available online nowadays also since the scene is so large, the shadow resolution was terrible, as a result, I had to develop a technique that only projects shadows for what I’m rendering. It’s far from perfect, but it serves its purpose.', 'https://www.youtube.com/embed/h-GsVF-QBtI?si=OzSLso_9pD5NDGpf','.\\images\\spider.gif')">
                     <img src=".\images\war3.jpg" alt="JAPR Engine + Warcraft 3">
                     <p>JAPR Engine + Warcraft 3</p>
                 </div>
-                <div class="personal-project" onclick="showPersonalProjectDetails('JAPR Engine', 'Japr Engine is my personal engine where I integrate SDL, OpenGL 3, Lua, and more. Along with this engine, I created a demo featuring procedural biome generation with voxels, Minecraft-style. Some highlights include the implementation of shadows, screen space ambient occlusion, and the generation of a single geometry encompassing all the voxels using a geometry shader.', 'https://www.youtube.com/watch?v=_HIitr2OMAY','')">
+                <div class="personal-project" onclick="showPersonalProjectDetails('JAPR Engine', 'Japr Engine is my personal engine where I integrate SDL, OpenGL 3, Lua, and more. Along with this engine, I created a demo featuring procedural biome generation with voxels, Minecraft-style. Some highlights include the implementation of shadows, screen space ambient occlusion, and the generation of a single geometry encompassing all the voxels using a geometry shader.', 'https://www.youtube.com/embed/_HIitr2OMAY?si=RU2qOLZgeUzvZ87L','')">
                     <img src=".\images\voxels.jpg" alt="JAPR Engine">
                     <p>JAPR Engine</p>
                 </div>
-                <div class="personal-project" onclick="showPersonalProjectDetails('Galactica', 'Galactica is a project I developed using Cocos2d-x and C++, focusing on procedural level generation that adapts to the player\'s skill level to enhance their gaming experience. The game is no longer available on the Play Store, but you can watch the gameplay here: ', 'https://www.youtube.com/watch?v=faT_EI0bbK8', '')"> 
+                <div class="personal-project" onclick="showPersonalProjectDetails('Galactica', 'Galactica is a project I developed using Cocos2d-x and C++, focusing on procedural level generation that adapts to the player\'s skill level to enhance their gaming experience. The game is no longer available on the Play Store, but you can watch the gameplay here: ', 'https://www.youtube.com/embed/faT_EI0bbK8?si=Tq-Rfk4dLkkE2DN9', '')"> 
                     <img src=".\images\galactica.jpg" alt="Galactica">
                     <p>Galactica</p>
                 </div>
@@ -497,7 +512,7 @@
             document.getElementById('personal-project-description').textContent = description;
             if (link && link.trim() !== "")
             {
-                document.getElementById('personal-project-link').innerHTML = `<a href="${link}" target="_blank">Watch Gameplay</a>`;
+                document.getElementById('personal-project-link').innerHTML = `<div class="video-container"><iframe class="responsive-iframe" src="${link}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`;
             }
             else
             {
